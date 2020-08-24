@@ -5,19 +5,24 @@
       <hr/>
       <div class="container">
         <label><strong>Full Names</strong></label>
-        <input type="text" class="form-control" placeholder="Enter Full Names" formControlName="fullName" required>
+        <input type="text" class="form-control" placeholder="Enter Full Names" formControlName="fullName"
+               required minlength="4">
+
         <label><strong>South African ID number</strong></label>
-        <input type="text" class="form-control" placeholder="Enter ID Number" formControlName="idNumber" required>
+        <input type="number" class="form-control" placeholder="Enter ID Number" formControlName="idNumber" required minlength="13" maxlength="13" size="13">
       </div>
       <button type="submit">Create Person</button>
     </div>
   </form>
-
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait. </p>
+    </ngx-spinner>
   <div>
-      <table>
+    <h1>Created Users</h1>
+      <table class="zigzag">
         <tr>
-          <th>Full Name</th>
-          <th>SA ID number</th>
+          <th class="header">Full Name</th>
+          <th class="header">SA ID number</th>
         </tr>
         <tr *ngFor="let com of persons">
           <th>{{com.fullName}}</th>

@@ -16,10 +16,29 @@ export class DataService {
 
     }
     getUsers(): Observable<Person[]> {
-        return this.httpClient.get<Person[]>(this.personURL);
+        return this.httpClient.get<Person[]>(this.personURL).pipe(
+          retry(1),
+          catchError(this.handleError)
+        );
     }
 
     createUsers(body): Observable<Person>{
-       return this.httpClient.post<Person>(this.personURL, JSON.stringify(body));
+       return this.httpClient.post<Person>(this.personURL, body).pipe(
+         retry(1),
+         catchError(this.handleError)
+       );
     }
+
+  handleError(error) {
+    let errorMessage = '';
+    if(error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = '\nNames may not contain special character and numbers \nA Valid South African ID number with 13 digits.';
+    } else {
+      // Get server-side error
+      errorMessage = '\nNames may not contain special character and numbers \nA Valid South African ID number must be 13 digits.';
+    }
+    window.alert(errorMessage);
+    return throwError(errorMessage);
+  }
 }

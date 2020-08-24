@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import {MatExpansionModule} from '@angular/material/expansion';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {DataService} from './services';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -13,9 +13,9 @@ import {DataService} from './services';
   ],
   imports: [
     BrowserModule,
-    MatExpansionModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
     ],
   providers: [DataService],
   bootstrap: [AppComponent]

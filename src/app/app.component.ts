@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Person} from './models';
-import {DataService} from './services/data.service';
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
-import {FormGroup} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Person } from './models';
+import { DataService } from './services/data.service';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-root',
@@ -17,11 +18,13 @@ export class AppComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dataService: DataService) {
-      this.captureForm = this.formBuilder.group({
-        fullName: '',
-        idNumber: ''
-      });
+    private dataService: DataService,
+    private spinnerService: NgxSpinnerService) {
+    this.captureForm = this.formBuilder.group({
+      id: '',
+      fullName: '',
+      idNumber: ''
+    });
 
   }
 
@@ -32,15 +35,16 @@ export class AppComponent implements OnInit {
 
   onSubmit() {
     let body = {
-      id: this.captureForm.value.idNumber,
-      fullName: this.captureForm.value.fullName,
-      idNumber: this.captureForm.value.idNumber
+      id: this.captureForm.controls['idNumber'].value,
+      fullName: this.captureForm.controls['fullName'].value,
+      idNumber: this.captureForm.controls['idNumber'].value
     };
+    this.spinnerService.show();
     this.dataService.createUsers(body).subscribe((data: any) => {
-      //your will get data success or false
       this.persons = data;
-
+      this.ngOnInit();
     });
+    this.spinnerService.hide();
   }
 }
 
