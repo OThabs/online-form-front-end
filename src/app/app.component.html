@@ -1,90 +1,4 @@
 
-<style>
-  html, body {
-    display: flex;
-    justify-content: center;
-    font-family: Roboto, Arial, sans-serif;
-    font-size: 15px;
-  }
-  form {
-    border: 5px solid #f1f1f1;
-  }
-  input[type=text], input[type=password] {
-    width: 100%;
-    padding: 16px 8px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  button {
-    background-color: #8ebf42;
-    color: white;
-    padding: 14px 0;
-    margin: 10px 0;
-    border: none;
-    cursor: grabbing;
-    width: 100%;
-  }
-  h1 {
-    text-align:center;
-    font-size:14;
-  }
-  button:hover {
-    opacity: 0.8;
-  }
-  .formcontainer {
-    text-align: left;
-    margin: 24px 50px 12px;
-  }
-  .container {
-    padding: 16px 0;
-    text-align:left;
-  }
-  span.psw {
-    float: right;
-    padding-top: 0;
-    padding-right: 15px;
-  }
-  /* Change styles for span on extra small screens */
-  @media screen and (max-width: 300px) {
-    span.psw {
-      display: block;
-      float: none;
-    }
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke
-    {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
 <div class="content" role="main">
   <form [formGroup]="captureForm" (ngSubmit)="onSubmit()" >
     <div class="formcontainer">
@@ -105,7 +19,7 @@
           <th>Full Name</th>
           <th>SA ID number</th>
         </tr>
-        <tr *ngFor="let com of persons$">
+        <tr *ngFor="let com of persons">
           <th>{{com.fullName}}</th>
           <th>{{com.idNumber}}</th>
         </tr>

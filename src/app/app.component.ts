@@ -11,19 +11,23 @@ import {FormGroup} from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   title = 'forms';
-  persons$: Person[];
+  persons: Person[] = [];
   person: Person;
   captureForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService) {
+      this.captureForm = this.formBuilder.group({
+        fullName: '',
+        idNumber: ''
+      });
 
   }
 
   ngOnInit() {
     this.dataService.getUsers()
-      .subscribe(data => this.persons$ = data);
+      .subscribe(data => this.persons = data);
   }
 
   onSubmit() {
@@ -34,7 +38,7 @@ export class AppComponent implements OnInit {
     };
     this.dataService.createUsers(body).subscribe((data: any) => {
       //your will get data success or false
-      this.persons$ = data;
+      this.persons = data;
 
     });
   }

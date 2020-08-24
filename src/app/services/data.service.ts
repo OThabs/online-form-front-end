@@ -15,13 +15,11 @@ export class DataService {
     constructor(private formBuilder: FormBuilder, private httpClient: HttpClient){
 
     }
-
-    getUsers(){
+    getUsers(): Observable<Person[]> {
         return this.httpClient.get<Person[]>(this.personURL);
     }
 
-    createUsers(body){
-       return this.httpClient.post<Person>(this.personURL, body);
-
+    createUsers(body): Observable<Person>{
+       return this.httpClient.post<Person>(this.personURL, JSON.stringify(body));
     }
 }
